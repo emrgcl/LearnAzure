@@ -1,0 +1,18 @@
+# .terraformignore
+
+# Ignore all files in the .git directory
+.git/*
+
+# Ignore all .tfvars files
+*.tfvars
+
+# Ignore all .bak files
+*.bak
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
