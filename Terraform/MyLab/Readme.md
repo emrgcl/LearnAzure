@@ -28,16 +28,19 @@ Naming Convention: `NSG	Subnet or NIC	nsg-<policy name or appname>-<###>	nsg-web
 
 snet-identity-weu-001
 
-| ResourceName          | Resource Group | Terraform Resource Type         | Location | Purpose                     |
-| --------------------- | -------------- | ------------------------------- | -------- | --------------------------- |
-| vnet-id-euw-001       | rg-id-prd-001  | azurerm_virtual_network         | weu      | identity vnet (10.0.0.0/16) |
-| snet-id-dc-euw-001    | rg-id-prd-001  | azurerm_subnet                  | weu      | dc subnet (10.0.1.0/27)     |
-| snet-id-kv-euw-001    | rg-id-prd-001  | azurerm_subnet                  | weu      | kv subnet (10.0.1.32/27)    |
-| nic-id-dc-prd-euw-001 | rg-id-prd-001  | azurerm_network_interface       | weu      | nic for vm1 (dc)            |
-| vmiddcprde            | rg-id-prd-001  | azurerm_windows_virtual_machine | weu      | dc vm (dc)                  |
-| nsg-id-dc-euw-001     | rg-id-prd-001  | azurerm_network_security_group  | weu      | nsg for dc subnet           |
-| nsg-id-kv-euw-001     | rg-id-prd-001  | azurerm_network_security_group  | weu      | nsg for kv subnet           |
-| kv-id-euw-001         | rg-id-prd-001  | azurerm_key_vault               | weu      | keyvault for identity       |
+| ResourceName            | Resource Group | Terraform Resource Type         | Location | Purpose                     |
+| ----------------------- | -------------- | ------------------------------- | -------- | --------------------------- |
+| vnet-id-euw-001         | rg-id-prd-001  | azurerm_virtual_network         | weu      | identity vnet (10.0.0.0/16) |
+| snet-id-dc-euw-001      | rg-id-prd-001  | azurerm_subnet                  | weu      | dc subnet (10.0.1.0/27)     |
+| snet-id-kv-euw-001      | rg-id-prd-001  | azurerm_subnet                  | weu      | kv subnet (10.0.1.32/27)    |
+| nic-id-dc-prd-euw-001   | rg-id-prd-001  | azurerm_network_interface       | weu      | nic for vm1 (dc)            |
+| vmiddcprde              | rg-id-prd-001  | azurerm_windows_virtual_machine | weu      | dc vm (dc)                  |
+| nsg-id-dc-euw-001       | rg-id-prd-001  | azurerm_network_security_group  | weu      | nsg for dc subnet           |
+| nsg-id-kv-euw-001       | rg-id-prd-001  | azurerm_network_security_group  | weu      | nsg for kv subnet           |
+| kv-id-euw-001           | rg-id-prd-001  | azurerm_key_vault               | weu      | keyvault for identity       |
+| peering to connectivity | rg-id-prd-001  | azurerm_key_vault               | weu      | keyvault for identity       |
+| route table             | rg-id-prd-001  | azurerm_key_vault               | weu      | keyvault for identity       |
+| route table association | rg-id-prd-001  | azurerm_key_vault               | weu      | keyvault for identity       |
 
 suggested resource types:
 azurerm_route_table
@@ -61,6 +64,10 @@ azurerm_route_table
 | pip-con-bas-prd-euw-001 | rg-con-prd-001 | azurerm_public_ip                                 | weu      | public ip for bastian         |
 | pip-con-vpn-prd-euw-001 | rg-con-prd-001 | azurerm_public_ip                                 | weu      | public ip for vpn             |
 | pip-con-afw-prd-euw-001 | rg-con-prd-001 | azurerm_public_ip                                 | weu      | public ip for afw             |
+| peering to identity     | rg-con-prd-001 | azurerm_public_ip                                 | weu      | public ip for afw             |
+
+| peering to management
+| peering to workload
 
 ## Workload Subscription - Corp
 
@@ -68,7 +75,7 @@ azurerm_route_table
 
 | ResourceName            | Resource Group | Terraform Resource Type                           | Location | Purpose                       |
 | ----------------------- | -------------- | ------------------------------------------------- | -------- | ----------------------------- |
-| vnet-con-euw-001        | rg-con-prd-001 | azurerm_virtual_network                           | weu      | conn vnet (10.1.0.0/16)       |
+| vnet-man-euw-001        | rg-con-prd-001 | azurerm_virtual_network                           | weu      | conn vnet (10.1.0.0/16)       |
 | snet-con-bas-euw-001    | rg-con-prd-001 | azurerm_subnet                                    | weu      | bastian subnet (10.1.0.64/27) |
 | snet-con-vpn-euw-001    | rg-con-prd-001 | storage account                                   | weu      | vpn subnet (10.1.0.0/27)      |
 | snet-con-afw-euw-001    | rg-con-prd-001 | log analtcis ws                                   | weu      | afw subnet (10.1.0.32/27)     |
