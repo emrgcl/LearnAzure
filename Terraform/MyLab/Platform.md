@@ -1,44 +1,10 @@
 # My Lab
 
-![Alt text](./Images/design.png)
-
-
-# Overview
-
-```yaml
-Contoso Azure Landing Zone Overview
-├── Identity Subscription:
-│   ├── VNet: vnet-id-euw-001 (10.0.0.0/16)
-│   │   ├── Subnet: snet-id-dc-euw-001 (10.0.1.0/27) - Domain Controllers
-│   │   │   └── VM: vmiddcprde - Domain Controller VM
-│   │   ├── Subnet: snet-id-kv-euw-001 (10.0.1.32/27) - Key Vault
-│   │   │   └── Key Vault: kv-id-euw-001
-│   │   └── Peering: peer-id-to-con-euw-001 to Connectivity VNet
-│
-├── Connectivity Subscription:
-│   ├── VNet: vnet-con-euw-001 (10.1.0.0/16)
-│   │   ├── Subnet: snet-con-bas-euw-001 (10.1.0.64/27) - Bastion Host
-│   │   │   └── Bastion Host: bas-con-prd-euw-001
-│   │   ├── Subnet: snet-con-vpn-euw-001 (10.1.0.0/27) - VPN Gateway
-│   │   │   └── VPN Gateway: vpng-con-vpn-euw-001
-│   │   ├── Subnet: snet-con-afw-euw-001 (10.1.0.32/27) - Azure Firewall
-│   │   │   └── Azure Firewall: afw-con-euw-001
-│   │   └── Peerings:
-│   │       ├── peer-con-to-man-euw-001 to Management VNet
-│   │       ├── peer-con-to-id-euw-001 to Identity VNet
-│   │       └── peer-con-to-wrk-euw-001 to Workload VNet (if applicable)
-│
-└── Management Subscription:
-    ├── VNet: vnet-man-euw-001 (10.2.0.0/16)
-    │   └── Subnet: snet-man-euw-001 (10.2.0.64/27) - Management Tools
-    ├── Storage Account: sta-man-shared-euw-001
-    └── Log Analytics Workspace: law-man-shared-euw-001
-
-```
-
 ## Identity Subscription
 
-## Resources to be created
+
+
+### Resources to be created
 
 | ResourceName            | Resource Group | Terraform Resource Type                | Location | Purpose                     |
 | ----------------------- | -------------- | -------------------------------------- | -------- | --------------------------- |
@@ -66,14 +32,14 @@ Contoso Azure Landing Zone Overview
 
 ## Connectivity Subscription
 
-## Resources to be created
+### Resources to be created
 
 | ResourceName            | Resource Group | Terraform Resource Type               | Location | Purpose                       |
 | ----------------------- | -------------- | --------------------------------------| -------- | ----------------------------- |
 | vnet-con-euw-001        | rg-con-prd-001 | azurerm_virtual_network               | weu      | conn vnet (10.1.0.0/16)       |
-| snet-con-bas-euw-001    | rg-con-prd-001 | azurerm_subnet                        | weu      | bastian subnet (10.1.0.64/27) |
-| snet-con-vpn-euw-001    | rg-con-prd-001 | azurerm_subnet                        | weu      | vpn subnet (10.1.0.0/27)      |
-| snet-con-afw-euw-001    | rg-con-prd-001 | azurerm_subnet                        | weu      | afw subnet (10.1.0.32/27)     |
+| snet-con-bas-euw-001    | rg-con-prd-001 | azurerm_subnet                        | weu      | bastian subnet (10.1.0.0/27) |
+| snet-con-vpn-euw-001    | rg-con-prd-001 | azurerm_subnet                        | weu      | vpn subnet (10.1.0.32/27)      |
+| snet-con-afw-euw-001    | rg-con-prd-001 | azurerm_subnet                        | weu      | afw subnet (10.1.0.64/27)     |
 | afw-con-euw-001         | rg-con-prd-001 | azurerm_firewall                      | weu      | azure firewall                |
 | vpng-con-vpn-euw-001    | rg-con-prd-001 | azurerm_virtual_network_gateway       | weu      | vpn gateway                   |
 | bas-con-prd-euw-001     | rg-con-prd-001 | azurerm_bastion_host                  | weu      | bastion                       |
@@ -104,20 +70,32 @@ Contoso Azure Landing Zone Overview
 - What should be the routing for the vpn ? 
 
 ## Management Subscription
+### Resources to be created
 
-| ResourceName              | Resource Group | Terraform Resource Type                           | Location | Purpose                       |
-| ------------------------- | -------------- | ------------------------------------------------- | -------- | ----------------------------- |
-| vnet-man-euw-001          | rg-man-prd-001 | azurerm_virtual_network                           | weu      | conn vnet (10.1.0.0/16)       |
-| snet-man-euw-001          | rg-man-prd-001 | azurerm_subnet                                    | weu      | bastian subnet (10.1.0.64/27) |
-| sta-man-shared-euw-001    | rg-man-prd-001 | storage account                                   | weu      | vpn subnet (10.1.0.0/27)      |
-| law-man-shared-euw-001    | rg-man-prd-001 | log analtcis workspace                            | weu      | afw subnet (10.1.0.32/27)     |
-| rt-man-euw-001            | rg-man-prd-001  | azurerm_route_table                              | weu      | main routing for identity     |
-| rta-man-euw-001           | rg-man-prd-001  | azurerm_subnet_route_table_association           | weu      | route assoc for dc            |
+| ResourceName              | Resource Group  | Terraform Resource Type                           | Location | Purpose                          |
+| ------------------------- | --------------- | ------------------------------------------------- | -------- | -------------------------------- |
+| vnet-man-euw-001          | rg-man-prd-001  | azurerm_virtual_network                           | weu      | management vnet (10.2.0.0/16)    |
+| snet-man-euw-001          | rg-man-prd-001  | azurerm_subnet                                    | weu      | management subnet (10.2.1.0/27)  |
+| sta-man-shared-euw-001    | rg-man-prd-001  | azurerm_storage_account                           | weu      | storage account                  |
+| law-man-shared-euw-001    | rg-man-prd-001  | azurerm_log_analytics_workspace                   | weu      | log analytics workspace          |
+| rt-man-euw-001            | rg-man-prd-001  | azurerm_route_table                               | weu      | main routing for identity        |
+| rta-man-euw-001           | rg-man-prd-001  | azurerm_subnet_route_table_association            | weu      | route assoc for dc               |
 
 ### Optional/Later use Resources
 
-| ResourceName            | Resource Group | Terraform Resource Type                           | Location | Purpose                        |
-| ----------------------- | -------------- | ------------------------------------------------- | -------- | ------------------------------ |
-| rt-con-bas-euw-001      | rg-man-prd-001  | azurerm_route_table                               | weu      | routing for bastian           |
-| rta-con-bas-euw-001     | rg-man-prd-001  | azurerm_subnet_route_table_association            | weu      | route assoc for bastian       |
-| rt-con-vpn-euw-001      | rg-man-prd-001  | azurerm_route_table                               | weu      | main routing fo vpn           |
+| ResourceName            | Resource Group  | Terraform Resource Type                           | Location | Purpose                        |
+| ----------------------- | --------------- | ------------------------------------------------- | -------- | ------------------------------ |
+| rt-con-bas-euw-001      | rg-man-prd-001  | azurerm_route_table                               | weu      | routing for bastian            |
+| rta-con-bas-euw-001     | rg-man-prd-001  | azurerm_subnet_route_table_association            | weu      | route assoc for bastian        |
+| rt-con-vpn-euw-001      | rg-man-prd-001  | azurerm_route_table                               | weu      | main routing fo vpn            |
+
+## Workload Subscription - Corp
+
+| ResourceName              | Resource Group  | Terraform Resource Type                           | Location | Purpose                          |
+| ------------------------- | --------------- | ------------------------------------------------- | -------- | -------------------------------- |
+| vnet-man-euw-001          | rg-man-prd-001  | azurerm_virtual_network                           | weu      | management vnet (10.2.0.0/16)    |
+| snet-man-euw-001          | rg-man-prd-001  | azurerm_subnet                                    | weu      | management subnet (10.2.1.0/27)  |
+| sta-man-shared-euw-001    | rg-man-prd-001  | azurerm_storage_account                           | weu      | storage account                  |
+| law-man-shared-euw-001    | rg-man-prd-001  | azurerm_log_analytics_workspace                   | weu      | log analytics workspace          |
+| rt-man-euw-001            | rg-man-prd-001  | azurerm_route_table                               | weu      | main routing for identity        |
+| rta-man-euw-001           | rg-man-prd-001  | azurerm_subnet_route_table_association            | weu      | route assoc for dc               |
