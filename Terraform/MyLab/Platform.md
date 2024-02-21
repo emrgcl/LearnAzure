@@ -12,7 +12,7 @@
 | snet-id-dc-euw-001      | rg-id-prd-001  | azurerm_subnet                         | weu      | dc subnet (10.0.1.0/27)     |
 | snet-id-kv-euw-001      | rg-id-prd-001  | azurerm_subnet                         | weu      | kv subnet (10.0.1.32/27)    |
 | nic-id-dc-prd-euw-001   | rg-id-prd-001  | azurerm_network_interface              | weu      | nic for vm1 (dc)            |
-| vmiddcprde              | rg-id-prd-001  | azurerm_windows_virtual_machine        | weu      | dc vm (dc)                  |
+| vmiddcprdeuw001         | rg-id-prd-001  | azurerm_windows_virtual_machine        | weu      | dc vm (dc)                  |
 | kv-id-euw-001           | rg-id-prd-001  | azurerm_key_vault                      | weu      | keyvault for identity       |
 | peer-id-to-con-euw-001  | rg-id-prd-001  | azurerm_virtual_network_peering        | weu      | peering to connectivity     |
 | rt-id-euw-001           | rg-id-prd-001  | azurerm_route_table                    | weu      | main routing for identity   |
@@ -94,8 +94,7 @@
 | ResourceName              | Resource Group  | Terraform Resource Type                           | Location | Purpose                          |
 | ------------------------- | --------------- | ------------------------------------------------- | -------- | -------------------------------- |
 | vnet-wrk-euw-001          | rg-wrk-prd-001  | azurerm_virtual_network                           | weu      | management vnet (10.3.0.0/16)    |
-| snet-wrk-shared-euw-001          | rg-man-prd-001  | azurerm_subnet                                    | weu      | management subnet (10.3.1.0/27)  |
-| sta-man-shared-euw-001    | rg-man-prd-001  | azurerm_storage_account                           | weu      | storage account                  |
-| law-man-shared-euw-001    | rg-man-prd-001  | azurerm_log_analytics_workspace                   | weu      | log analytics workspace          |
+| snet-man-euw-001          | rg-man-prd-001  | azurerm_subnet                                    | weu      | management subnet (10.3.1.0/27)  |
+| vmwrkdevprdeuw001         | rg-id-prd-001   | azurerm_windows_virtual_machine                    | weu      | dc vm (dc)                  |
 | rt-man-euw-001            | rg-man-prd-001  | azurerm_route_table                               | weu      | main routing for identity        |
 | rta-man-euw-001           | rg-man-prd-001  | azurerm_subnet_route_table_association            | weu      | route assoc for dc               |

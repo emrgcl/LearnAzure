@@ -1,9 +1,23 @@
 
 # Resource group
-resource "azurerm_resource_group" "example" {
-  name     = "example-resource-group"
+resource "azurerm_resource_group" "rg-id-prd-001" {
+  name     = var.rg_id
+  location = var.location
+}
+resource "azurerm_resource_group" "rg-con-prd-001" {
+  name     = var.rg_con
   location = "West Europe"
 }
+resource "azurerm_resource_group" "rg-man-prd-001" {
+  name     = var.rg_man
+  location = "West Europe"
+}
+resource "azurerm_resource_group" "rg-wrk-prd-001" {
+  name     = var.rg_wrk
+  location = "West Europe"
+}
+
+
 
 # Virtual network 1
 resource "azurerm_virtual_network" "vlan1" {
